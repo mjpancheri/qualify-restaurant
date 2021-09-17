@@ -1,0 +1,23 @@
+<%= render :partial => "titulo" %>
+<%= link_to 'Novo', new_restaurante_path %>
+<p>---</p>
+<table>
+<tr>
+  <th>Nome</th>
+  <th>Endereço</th>
+  <th>Especialidade</th>
+</tr>
+<% @restaurantes.each do |restaurante| %>
+  <tr>
+    <td><%= restaurante.nome %></td>
+    <td><%= restaurante.endereco %></td>
+    <td><%= restaurante.especialidade %></td>
+    <td><%= link_to 'Show', restaurante_path(restaurante) %></td>
+    <td><%= link_to 'Edit', edit_restaurante_path(restaurante) %></td>
+    <td><%= link_to 'Destroy', restaurante_path(restaurante),
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+<br/>
