@@ -4,7 +4,11 @@ class Restaurante < ApplicationRecord
   # named_scope :pelo_nome, :order => ’nome’
   
   has_many :qualificacoes
+  has_many :comentarios, :as => :comentavel
   has_and_belongs_to_many :pratos
+  
+  has_attached_file :foto, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :foto, content_type: /\Aimage\/.*\z/
 
   validates_presence_of :nome, :message => "deve ser preenchido"
   validates_presence_of :endereco, :message => "deve ser preenchido"
