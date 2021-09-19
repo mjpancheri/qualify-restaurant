@@ -1,0 +1,4 @@
+<p id="comentario_<%= comentario.id %>">
+  <%= comentario.conteudo %> -
+  <%= link_to 'Destroy', comentario, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+</p>

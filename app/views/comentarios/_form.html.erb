@@ -1,0 +1,25 @@
+<%= form_with(model: comentario) do |form| %>
+  <% if comentario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comentario.errors.count, "error") %> prohibited this comentario from being saved:</h2>
+
+      <ul>
+        <% comentario.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :conteudo %>
+    <%= form.text_area :conteudo %>
+  </div>
+
+  <%= form.hidden_field :comentavel_id %>
+  <%= form.hidden_field :comentavel_type %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
