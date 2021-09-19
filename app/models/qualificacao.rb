@@ -2,6 +2,8 @@ class Qualificacao < ApplicationRecord
   belongs_to :cliente
   belongs_to :restaurante
 
+  has_many :comentarios, :as => :comentavel
+
   validates_presence_of :cliente_id, :restaurante_id
   validates_associated :cliente, :restaurante
   
