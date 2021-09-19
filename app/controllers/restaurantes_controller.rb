@@ -1,10 +1,11 @@
 class RestaurantesController < ApplicationController
+  before_action :set_restaurante, only: %i[ show edit update destroy ]
+
   def index
-    @restaurantes = Restaurante.all
+    @restaurantes = Restaurante.paginate :page => params[:page], :per_page => 1
   end
 
   def show
-    @restaurante = Restaurante.find(params[:id])
   end
 
   def new
@@ -12,7 +13,7 @@ class RestaurantesController < ApplicationController
   end
 
   def create
-    @restaurante = Restaurante.new(params[:restaurante])
+    @restaurante = Restaurante.new(restaurante_params)
     if @restaurante.save
       redirect_to(:action => "show", :id => @restaurante)
     else
@@ -21,11 +22,9 @@ class RestaurantesController < ApplicationController
   end
 
   def edit
-    @restaurante = Restaurante.find(params[:id])
   end
 
   def update
-    @restaurante = Restaurante.find(params[:id])
     if @restaurante.update_attributes(params[:restaurante])
       redirect_to(:action => "show", :id => @restaurante)
     else
@@ -34,8 +33,18 @@ class RestaurantesController < ApplicationController
   end
 
   def destroy
-    @restaurante = Restaurante.find(params[:id])
     @restaurante.destroy
     redirect_to(:action => "index")
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_restaurante
+      @restaurante = Restaurante.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def restaurante_params
+      params.require(:restaurante).permit(:nome, :endereco, :especialidade, :foto)
+    end
 end
