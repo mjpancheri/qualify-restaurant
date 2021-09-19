@@ -20,5 +20,9 @@
   <%= valor_formatado(@qualificacao.valor_gasto) %>
 </p>
 
+<% unless @qualificacao.comentarios.empty? %>
+  <%= comentarios @qualificacao %>
+<% end %> 
+
 <%= link_to 'Edit', edit_qualificacao_path(@qualificacao) %> |
 <%= link_to 'Back', qualificacoes_path %>
